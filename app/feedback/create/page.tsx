@@ -42,9 +42,14 @@ export default function CreateFeedback() {
         name="description"
         helperText="Include any specific comments on what should be improved, added, etc."
       />
-      <Button type="submit" variant="contained">
-        Submit
-      </Button>
+      <Box display="flex" gap={2}>
+        <Button sx={{ flexGrow: 1 }} variant="outlined" color="error" href="/">
+          Cancel
+        </Button>
+        <Button sx={{ flexGrow: 1 }} type="submit" variant="contained">
+          Submit
+        </Button>
+      </Box>
     </Box>
   );
 }
