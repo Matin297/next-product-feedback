@@ -1,4 +1,3 @@
-import Link from "next/link";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
@@ -14,12 +13,7 @@ export default function Navbar() {
       <Toolbar>
         <Container>
           <Box display="flex" justifyContent="space-between">
-            <MUILink
-              underline="none"
-              sx={{ color: "common.white" }}
-              component={Link}
-              href="/"
-            >
+            <MUILink underline="none" sx={{ color: "common.white" }} href="/">
               <Box display="flex" gap={2} alignItems="center">
                 <AcUnitTwoToneIcon fontSize="large" />
                 <Typography fontWeight="bold" variant="h5">
