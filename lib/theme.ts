@@ -1,7 +1,9 @@
 "use client";
+
 import { Roboto } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
 import { teal, amber } from "@mui/material/colors";
+import LinkBehavior from "@/components/link-behavior";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -16,6 +18,18 @@ const theme = createTheme({
   palette: {
     primary: teal,
     secondary: amber,
+  },
+  components: {
+    MuiLink: {
+      defaultProps: {
+        component: LinkBehavior,
+      },
+    },
+    MuiButton: {
+      defaultProps: {
+        LinkComponent: LinkBehavior,
+      },
+    },
   },
 });
 
