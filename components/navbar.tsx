@@ -6,14 +6,15 @@ import Typography from "@mui/material/Typography";
 import MUILink from "@mui/material/Link";
 import Box from "@mui/material/Box";
 import AcUnitTwoToneIcon from "@mui/icons-material/AcUnitTwoTone";
+import { Paper } from "@mui/material";
 
 export default function Navbar() {
   return (
-    <AppBar>
+    <AppBar variant="outlined" sx={{ backgroundColor: "common.white" }}>
       <Toolbar>
         <Container>
           <Box display="flex" justifyContent="space-between">
-            <MUILink underline="none" sx={{ color: "common.white" }} href="/">
+            <MUILink underline="none" href="/">
               <Box display="flex" gap={2} alignItems="center">
                 <AcUnitTwoToneIcon fontSize="large" />
                 <Typography fontWeight="bold" variant="h5">
@@ -21,9 +22,7 @@ export default function Navbar() {
                 </Typography>
               </Box>
             </MUILink>
-            <Button variant="outlined" color="secondary">
-              Login
-            </Button>
+            <Button size="large">Login</Button>
           </Box>
         </Container>
       </Toolbar>
