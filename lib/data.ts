@@ -1,4 +1,5 @@
 import db from "@/prisma/client";
+import { Status } from "@prisma/client";
 
 export async function fetchCategories() {
   try {
@@ -7,5 +8,26 @@ export async function fetchCategories() {
   } catch (error) {
     console.error(error);
     throw new Error("Failed to fetch categories!");
+  }
+}
+
+export async function fetchFeedbacksByStatus(status: Status = "SUGGESTION") {
+  try {
+    const feedbacks = await db.feedback.findMany({
+      where: {
+        status: status,
+      },
+      include: {
+        category: {
+          select: {
+            title: true,
+          },
+        },
+      },
+    });
+    return feedbacks;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch Feedbacks!");
   }
 }
