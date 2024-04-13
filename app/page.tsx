@@ -1,5 +1,6 @@
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
+import FeedbackList from "@/components/home/feedback-list";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       >
         Add Feedback
       </Button>
+      <FeedbackList />
     </div>
   );
 }
