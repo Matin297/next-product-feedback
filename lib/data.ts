@@ -18,6 +18,11 @@ export async function fetchFeedbacksByStatus(status: Status = "SUGGESTION") {
         status: status,
       },
       include: {
+        _count: {
+          select: {
+            comments: true,
+          },
+        },
         category: {
           select: {
             title: true,
