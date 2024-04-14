@@ -14,25 +14,47 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+model User {
+  id        String     @id @default(cuid())
+  email     String     @unique
+  name      String?
+  image     String?
+  comments  Comment[]
+  feedbacks Feedback[]
+}
+
 model Category {
   id        String     @id @default(cuid())
   title     String
-  feedbacks Feedback[]
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  feedbacks Feedback[]
 }
 
 model Feedback {
-  id          String   @id @default(cuid())
-  title       String   @db.VarChar(255)
+  id          String    @id @default(cuid())
+  title       String    @db.VarChar(255)
   description String
-  upvotes     Int      @default(0)
-  status      Status   @default(SUGGESTION)
+  upvotes     Int       @default(0)
   category_id String
+  user_id     String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  comments    Comment[]
+  status      Status    @default(SUGGESTION)
+  category    Category  @relation(fields: [category_id], references: [id])
+  user        User      @relation(fields: [user_id], references: [id])
+}
+
+model Comment {
+  id          String   @id @default(cuid())
+  content     String
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  category Category @relation(fields: [category_id], references: [id])
+  user_id     String
+  feedback_id String
+  user        User     @relation(fields: [user_id], references: [id])
+  feedback    Feedback @relation(fields: [feedback_id], references: [id])
 }
 
 enum Status {
