@@ -2,7 +2,8 @@
 
 import { useFormState } from "react-dom";
 import { Category } from "@prisma/client";
-import createFeedbackAction from "@/actions/create-feedback";
+import { createFeedbackAction } from "@/actions";
+
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import Select from "@mui/material/Select";
