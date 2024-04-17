@@ -4,6 +4,7 @@ import { z } from "zod";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import db from "@/prisma/client";
+import { auth } from "@/auth";
 
 const CreateFeedbackSchema = z
   .object({
@@ -22,7 +23,7 @@ interface CreateFeedbackState {
   };
 }
 
-export default async function createFeedbackAction(
+export async function createFeedbackAction(
   _: CreateFeedbackState,
   formData: FormData
 ): Promise<CreateFeedbackState> {
@@ -39,12 +40,21 @@ export default async function createFeedbackAction(
 
   const { title, description, category_id } = validationResult.data;
 
+  const session = await auth();
+
+  if (!session || !session.user?.id) {
+    return {
+      message: "Authentication Error: please login first.",
+    };
+  }
+
   try {
     await db.feedback.create({
       data: {
         title,
         description,
         category_id,
+        user_id: session.user.id,
       },
     });
   } catch {
