@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
+import { SessionProvider } from "next-auth/react";
 import theme from "@/lib/theme";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
@@ -21,15 +22,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>
-            <Navbar />
-            <Toolbar />
-            <Container>
-              <Box paddingBlock={3}>{children}</Box>
-            </Container>
-          </ThemeProvider>
-        </AppRouterCacheProvider>
+        <SessionProvider>
+          <AppRouterCacheProvider>
+            <ThemeProvider theme={theme}>
+              <Navbar />
+              <Toolbar />
+              <Container>
+                <Box paddingBlock={3}>{children}</Box>
+              </Container>
+            </ThemeProvider>
+          </AppRouterCacheProvider>
+        </SessionProvider>
       </body>
     </html>
   );
