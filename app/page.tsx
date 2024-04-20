@@ -17,14 +17,20 @@ export default function Home({ searchParams }: HomeProps) {
   const order = searchParams?.order;
 
   return (
-    <>
-      <Box
-        gap={2}
-        display="flex"
-        alignItems="center"
-        justifyContent="space-between"
+    <Box display="flex" gap={5}>
+      <Suspense
+        key={`${field || ""}${order || ""}`}
+        fallback={<FeedbackListSkeleton />}
       >
-        <FeedbackSort />
+        <FeedbackList field={field} order={order} />
+      </Suspense>
+      <Box
+        component="aside"
+        minWidth={200}
+        display="flex"
+        flexDirection="column"
+        gap={2}
+      >
         <Button
           href="/feedback/create"
           variant="contained"
@@ -32,13 +38,8 @@ export default function Home({ searchParams }: HomeProps) {
         >
           Add Feedback
         </Button>
+        <FeedbackSort />
       </Box>
-      <Suspense
-        key={`${field || ""}${order || ""}`}
-        fallback={<FeedbackListSkeleton />}
-      >
-        <FeedbackList field={field} order={order} />
-      </Suspense>
-    </>
+    </Box>
   );
 }
