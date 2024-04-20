@@ -1,5 +1,6 @@
 import db from "@/prisma/client";
 import { Status } from "@prisma/client";
+import { FeedbackSortOption } from "@/lib/types";
 
 export async function fetchCategories() {
   try {
@@ -11,9 +12,20 @@ export async function fetchCategories() {
   }
 }
 
-export async function fetchFeedbacksByStatus(status: Status = "SUGGESTION") {
+export async function fetchFeedbacksByStatus(
+  status: Status = "SUGGESTION",
+  orderOptions: FeedbackSortOption = {}
+) {
   try {
+    const { field, order } = orderOptions;
+
     const feedbacks = await db.feedback.findMany({
+      ...(field &&
+        order && {
+          orderBy: {
+            [field]: order,
+          },
+        }),
       where: {
         status: status,
       },
