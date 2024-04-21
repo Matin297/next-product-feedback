@@ -6,6 +6,7 @@ import { Category } from "@prisma/client";
 
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
+import Typography from "@mui/material/Typography";
 
 interface FeedbackFilterProps {
   categories: Category[];
@@ -32,22 +33,25 @@ export default function FeedbackFilter({ categories }: FeedbackFilterProps) {
   };
 
   return (
-    <Box display="flex" flexWrap="wrap" gap={1}>
-      <Chip
-        color="secondary"
-        variant={!activeId ? "filled" : "outlined"}
-        label="All"
-        onClick={handleClick(null)}
-      />
-      {categories.map(({ title, id }) => (
+    <>
+      <Typography>Filter</Typography>
+      <Box display="flex" flexWrap="wrap" gap={1}>
         <Chip
           color="secondary"
-          variant={activeId === id ? "filled" : "outlined"}
-          key={id}
-          label={title}
-          onClick={handleClick(id)}
+          variant={!activeId ? "filled" : "outlined"}
+          label="All"
+          onClick={handleClick(null)}
         />
-      ))}
-    </Box>
+        {categories.map(({ title, id }) => (
+          <Chip
+            color="secondary"
+            variant={activeId === id ? "filled" : "outlined"}
+            key={id}
+            label={title}
+            onClick={handleClick(id)}
+          />
+        ))}
+      </Box>
+    </>
   );
 }

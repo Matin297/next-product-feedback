@@ -4,6 +4,7 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
+import Typography from "@mui/material/Typography";
 import InputLabel from "@mui/material/InputLabel/InputLabel";
 import FormControl from "@mui/material/FormControl/FormControl";
 
@@ -44,21 +45,24 @@ export default function FeedbackSort() {
   }
 
   return (
-    <FormControl variant="standard" sx={{ minWidth: 120 }}>
-      <InputLabel id="orderby">Order By</InputLabel>
-      <Select
-        id="orderby"
-        label="Order By"
-        labelId="orderby"
-        defaultValue={readDefaultOrder()}
-        onChange={handleChange}
-      >
-        {FEEDBACK_SORT_OPTIONS.map(({ id, title, value }) => (
-          <MenuItem key={id} value={value}>
-            {title}
-          </MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <>
+      <Typography>Sort</Typography>
+      <FormControl sx={{ minWidth: 120 }}>
+        <InputLabel id="orderby">Order By</InputLabel>
+        <Select
+          id="orderby"
+          label="Order By"
+          labelId="orderby"
+          defaultValue={readDefaultOrder()}
+          onChange={handleChange}
+        >
+          {FEEDBACK_SORT_OPTIONS.map(({ id, title, value }) => (
+            <MenuItem key={id} value={value}>
+              {title}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+    </>
   );
 }
