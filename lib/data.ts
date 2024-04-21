@@ -1,6 +1,6 @@
 import db from "@/prisma/client";
 import { Status } from "@prisma/client";
-import { FeedbackSortOption } from "@/lib/types";
+import { FeedbackSortOption, FeedbackFilterOption } from "@/lib/types";
 
 export async function fetchCategories() {
   try {
@@ -14,10 +14,10 @@ export async function fetchCategories() {
 
 export async function fetchFeedbacksByStatus(
   status: Status = "SUGGESTION",
-  orderOptions: FeedbackSortOption = {}
+  orderOptions: FeedbackSortOption & FeedbackFilterOption = {}
 ) {
   try {
-    const { field, order } = orderOptions;
+    const { field, order, categoryId } = orderOptions;
 
     const feedbacks = await db.feedback.findMany({
       ...(field &&
@@ -27,7 +27,8 @@ export async function fetchFeedbacksByStatus(
           },
         }),
       where: {
-        status: status,
+        status,
+        ...(categoryId && { category_id: categoryId }),
       },
       include: {
         _count: {
