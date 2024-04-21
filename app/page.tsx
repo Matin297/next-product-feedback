@@ -21,7 +21,7 @@ export default function Home({ searchParams }: HomeProps) {
   return (
     <Box display="flex" gap={5}>
       <Suspense
-        key={`${field || ""}${order || ""}`}
+        key={`${field || ""}${order || ""}${categoryId || ""}`}
         fallback={<FeedbackListSkeleton />}
       >
         <FeedbackList field={field} order={order} categoryId={categoryId} />
