@@ -1,5 +1,5 @@
 import { fetchFeedbacksByStatus } from "@/lib/data";
-import { FeedbackSortOption } from "@/lib/types";
+import { FeedbackSortOption, FeedbackFilterOption } from "@/lib/types";
 
 import Voting from "./voting";
 import Box from "@mui/material/Box";
@@ -11,15 +11,17 @@ import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
-interface FeedbackListProps extends FeedbackSortOption {}
+interface FeedbackListProps extends FeedbackSortOption, FeedbackFilterOption {}
 
 export default async function FeedbackList({
   order,
   field,
+  categoryId,
 }: FeedbackListProps) {
   const feedbacks = await fetchFeedbacksByStatus("SUGGESTION", {
     field,
     order,
+    categoryId,
   });
 
   return (
