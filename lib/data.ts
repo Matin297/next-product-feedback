@@ -49,3 +49,27 @@ export async function fetchFeedbacksByStatus(
     throw new Error("Failed to fetch Feedbacks!");
   }
 }
+
+export async function fetchRoadmapSummary() {
+  try {
+    const summary = await db.feedback.groupBy({
+      by: ["status"],
+      where: {
+        status: {
+          not: "SUGGESTION",
+        },
+      },
+      _count: {
+        id: true,
+      },
+    });
+
+    return summary.reduce<Partial<Record<Status, number>>>((acc, row) => {
+      acc[row.status] = row._count.id;
+      return acc;
+    }, {});
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch Roadmap summary!");
+  }
+}
