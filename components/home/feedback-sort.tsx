@@ -46,7 +46,7 @@ export default function FeedbackSort() {
 
   return (
     <>
-      <Typography>Sort</Typography>
+      <Typography fontWeight="bold">Sort</Typography>
       <FormControl sx={{ minWidth: 120 }}>
         <InputLabel id="orderby">Order By</InputLabel>
         <Select

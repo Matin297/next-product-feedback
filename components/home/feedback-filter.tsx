@@ -34,7 +34,7 @@ export default function FeedbackFilter({ categories }: FeedbackFilterProps) {
 
   return (
     <>
-      <Typography>Filter</Typography>
+      <Typography fontWeight="bold">Filter</Typography>
       <Box display="flex" flexWrap="wrap" gap={1}>
         <Chip
           color="secondary"
