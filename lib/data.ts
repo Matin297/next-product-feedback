@@ -1,3 +1,4 @@
+import { cache } from "react";
 import db from "@/prisma/client";
 import { Status } from "@prisma/client";
 import { FeedbackSortOption, FeedbackFilterOption } from "@/lib/types";
@@ -71,5 +72,30 @@ export async function fetchRoadmapSummary() {
   } catch (error) {
     console.error(error);
     throw new Error("Failed to fetch Roadmap summary!");
+  }
+}
+
+export async function fetchFeedbackById(id: string) {
+  try {
+    const feedback = await db.feedback.findFirst({
+      where: {
+        id,
+      },
+      include: {
+        category: {
+          select: { title: true },
+        },
+        _count: {
+          select: {
+            comments: true,
+          },
+        },
+      },
+    });
+
+    return feedback;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch the feedback!");
   }
 }
