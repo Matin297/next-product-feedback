@@ -5,11 +5,13 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
 import FeedbackSort from "@/components/home/feedback-sort";
-import FeedbackList from "@/components/home/feedback-list";
-import RoadmapSummary from "@/components/home/roadmap-summary";
-import FeedbackFilter from "@/components/home/feedback-filter-wrapper";
-import FeedbackListSkeleton from "@/components/home/feedback-list-skeleton";
-import RoadmapSummarySkeleton from "@/components/home/roadmap-summary-skeleton";
+import FeedbackList, {
+  FeedbackListSkeleton,
+} from "@/components/home/feedback-list";
+import RoadmapSummary, {
+  RoadmapSummarySkeleton,
+} from "@/components/home/roadmap-summary";
+import FeedbackFilter from "@/components/home/feedback-filter";
 
 interface HomeProps {
   searchParams?: FeedbackSortOption & FeedbackFilterOption;
@@ -30,7 +32,8 @@ export default function Home({ searchParams }: HomeProps) {
       </Suspense>
       <Box
         component="aside"
-        minWidth={250}
+        width="100%"
+        maxWidth={250}
         display="flex"
         flexDirection="column"
         gap={2}

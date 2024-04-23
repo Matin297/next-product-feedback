@@ -1,5 +1,5 @@
 import { fetchCategories } from "@/lib/data";
-import FeedbackFilter from "./feedback-filter";
+import FeedbackFilter from "./filter";
 
 export default async function FeedbackFilterWrapper() {
   const categories = await fetchCategories();
