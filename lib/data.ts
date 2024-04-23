@@ -99,3 +99,27 @@ export async function fetchFeedbackById(id: string) {
     throw new Error("Failed to fetch the feedback!");
   }
 }
+
+export const fetchFeedbackComments = cache(async (feedbackId: string) => {
+  try {
+    const comments = await db.comment.findMany({
+      where: {
+        feedback_id: feedbackId,
+      },
+      include: {
+        user: {
+          select: {
+            name: true,
+            image: true,
+            email: true,
+          },
+        },
+      },
+    });
+
+    return comments;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch feedback comments!");
+  }
+});
