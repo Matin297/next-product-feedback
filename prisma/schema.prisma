@@ -58,6 +58,7 @@ model Comment {
   updatedAt   DateTime @updatedAt
   user_id     String
   feedback_id String
+  parent_id   String?
   user        User     @relation(fields: [user_id], references: [id])
   feedback    Feedback @relation(fields: [feedback_id], references: [id])
 }
