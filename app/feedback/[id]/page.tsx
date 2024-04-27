@@ -2,15 +2,16 @@ import { Suspense } from "react";
 
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import EditIcon from "@mui/icons-material/Edit";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import FeedbackInfo, {
   FeedbackInfoSkeleton,
 } from "@/components/feedback/information";
 import CommentList, {
   CommentListSkeleton,
 } from "@/components/feedback/comment-list";
+import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import CommentForm from "@/components/feedback/comment-form";
 
 interface FeedbackDetailsProps {
   params: {
@@ -38,6 +39,8 @@ export default async function FeedbackDetails({
           <FeedbackInfo feedbackId={params.id} />
         </Suspense>
       </Box>
+
+      <CommentForm feedbackId={params.id} />
 
       <Box>
         <Typography variant="h6">Comments</Typography>
