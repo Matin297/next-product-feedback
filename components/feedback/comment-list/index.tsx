@@ -6,6 +6,7 @@ import List from "@mui/material/List";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
+import CommentReply from "../comment-reply";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
@@ -44,7 +45,7 @@ export default async function CommentList({
                 <Typography marginBlockStart={3}>{comment.content}</Typography>
               </CardContent>
               <CardActions>
-                <Button>Reply</Button>
+                <CommentReply feedbackId={feedbackId} parentId={comment.id} />
               </CardActions>
               <CommentList feedbackId={feedbackId} parentId={comment.id} />
             </Card>
