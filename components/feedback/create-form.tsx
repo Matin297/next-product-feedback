@@ -10,11 +10,11 @@ import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
+import FormButton from "@/components/form-button";
 import InputLabel from "@mui/material/InputLabel";
 import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
-import FormButton from "@/components/form-button";
 
 interface CreateFeedbackFormProps {
   categories: Category[];
@@ -27,13 +27,13 @@ export default function CreateFeedbackForm({
 
   return (
     <Box
-      action={action}
-      maxWidth={500}
-      marginInline="auto"
-      component="form"
-      display="flex"
-      flexDirection="column"
       gap={4}
+      maxWidth={500}
+      display="flex"
+      action={action}
+      component="form"
+      marginInline="auto"
+      flexDirection="column"
     >
       {state.message && <Alert severity="error">{state.message}</Alert>}
       <Typography variant="h6">Feedback Details</Typography>
@@ -79,7 +79,7 @@ export default function CreateFeedbackForm({
             : "Include any specific comments on what should be improved, added, etc."
         }
       />
-      <Box display="flex" gap={2} alignSelf="end">
+      <Box display="flex" gap={2} justifyContent="flex-end">
         <Button variant="outlined" color="error" href="/">
           Cancel
         </Button>
