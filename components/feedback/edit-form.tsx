@@ -1,9 +1,12 @@
 "use client";
 
+import { useFormState } from "react-dom";
+import { editFeedback } from "@/actions";
 import { Category, Status } from "@prisma/client";
 import { FeedbackByIdReturnType } from "@/lib/data";
 
 import Box from "@mui/material/Box";
+import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
@@ -25,23 +28,38 @@ export default function EditFeedbackForm({
   feedback,
   categories,
 }: CreateFeedbackFormProps) {
+  const [state, action] = useFormState(editFeedback, {});
+
   return (
     <Box
       gap={4}
       maxWidth={500}
       display="flex"
+      action={action}
       component="form"
       marginInline="auto"
       flexDirection="column"
     >
+      {state.message && <Alert severity="error">{state.message}</Alert>}
+      <input type="hidden" name="id" value={feedback?.id} />
       <Typography variant="h6">Feedback Info</Typography>
       <TextField
         required
+        name="title"
         label="Title"
         defaultValue={feedback?.title || ""}
-        helperText="Add a short, descriptive headline"
+        error={Boolean(state.errors?.title)}
+        helperText={
+          state.errors?.title
+            ? state.errors?.title.join(", ")
+            : "Add a short, descriptive headline."
+        }
       />
-      <FormControl fullWidth required>
+      <FormControl
+        fullWidth
+        required
+        error={Boolean(state.errors?.category_id)}
+      >
         <InputLabel id="category">Category</InputLabel>
         <Select
           label="Category"
@@ -55,14 +73,18 @@ export default function EditFeedbackForm({
             </MenuItem>
           ))}
         </Select>
-        <FormHelperText>Choose a status for your feedback</FormHelperText>
+        <FormHelperText>
+          {state.errors?.category_id
+            ? state.errors?.category_id.join(", ")
+            : "Choose a category for your feedback."}
+        </FormHelperText>
       </FormControl>
-      <FormControl fullWidth required>
+      <FormControl fullWidth required error={Boolean(state.errors?.status)}>
         <InputLabel id="status">Status</InputLabel>
         <Select
+          name="status"
           label="status"
           labelId="status"
-          name="status_id"
           defaultValue={feedback?.status || ""}
           sx={{ textTransform: "capitalize" }}
         >
@@ -76,7 +98,11 @@ export default function EditFeedbackForm({
             </MenuItem>
           ))}
         </Select>
-        <FormHelperText>Choose a category for your feedback</FormHelperText>
+        <FormHelperText>
+          {state.errors?.status
+            ? state.errors?.status.join(", ")
+            : "Choose a status for your feedback."}
+        </FormHelperText>
       </FormControl>
       <TextField
         rows={8}
@@ -84,7 +110,12 @@ export default function EditFeedbackForm({
         name="description"
         label="Description"
         defaultValue={feedback?.description || ""}
-        helperText="Include any specific comments on what should be improved, added, etc."
+        error={Boolean(state.errors?.description)}
+        helperText={
+          state.errors?.description
+            ? state.errors?.description.join(", ")
+            : "Include any specific comments on what should be improved, added, etc."
+        }
       />
       <Box display="flex" justifyContent="flex-end" gap={2}>
         <Button
@@ -94,7 +125,7 @@ export default function EditFeedbackForm({
         >
           Cancel
         </Button>
-        <FormButton>Submit</FormButton>
+        <FormButton>Save</FormButton>
       </Box>
     </Box>
   );
