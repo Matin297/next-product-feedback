@@ -75,6 +75,10 @@ export async function fetchRoadmapSummary() {
   }
 }
 
+export type FeedbackByIdReturnType = Awaited<
+  ReturnType<typeof fetchFeedbackById>
+>;
+
 export async function fetchFeedbackById(id: string) {
   try {
     const feedback = await db.feedback.findFirst({
