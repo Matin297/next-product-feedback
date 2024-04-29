@@ -2,6 +2,7 @@
 
 import { useFormState } from "react-dom";
 import { editFeedback } from "@/actions";
+import { deleteFeedback } from "@/actions";
 import { Category, Status } from "@prisma/client";
 import { FeedbackByIdReturnType } from "@/lib/data";
 
@@ -15,6 +16,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Typography from "@mui/material/Typography";
 import FormButton from "@/components/form-button";
 import FormControl from "@mui/material/FormControl";
+import DeleteDialog from "@/components/delete-dialog";
 import FormHelperText from "@mui/material/FormHelperText";
 
 interface CreateFeedbackFormProps {
@@ -42,6 +44,7 @@ export default function EditFeedbackForm({
     >
       {state.message && <Alert severity="error">{state.message}</Alert>}
       <input type="hidden" name="id" value={feedback?.id} />
+      <DeleteDialog deleteAction={deleteFeedback.bind(null, feedback?.id)} />
       <Typography variant="h6">Feedback Info</Typography>
       <TextField
         required
