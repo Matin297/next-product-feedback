@@ -4,3 +4,4 @@ export * from "./add-comment";
 export * from "./edit-feedback";
 export * from "./create-feedback";
 export * from "./update-feedback";
+export * from "./delete-feedback";
