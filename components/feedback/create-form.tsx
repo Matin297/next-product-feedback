@@ -10,7 +10,7 @@ import Select from "@mui/material/Select";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
-import FormButton from "@/components/form-button";
+import FormButton from "@/components/common/form-button";
 import InputLabel from "@mui/material/InputLabel";
 import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";

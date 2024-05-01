@@ -2,7 +2,7 @@
 
 import { Roboto } from "next/font/google";
 import { createTheme } from "@mui/material/styles";
-import LinkBehavior from "@/components/link-behavior";
+import LinkBehavior from "@/components/common/link-behavior";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],

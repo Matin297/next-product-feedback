@@ -6,7 +6,7 @@ import theme from "@/lib/theme";
 import Toolbar from "@mui/material/Toolbar";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/common/navbar";
 import "./globals.css";
 
 export const metadata: Metadata = {

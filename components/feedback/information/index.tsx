@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { fetchFeedbackById } from "@/lib/data";
 
-import FeedbackCard from "@/components/feedback-card";
+import FeedbackCard from "@/components/common/feedback-card";
 import Skeleton from "./skeleton";
 
 interface FeedbackInfoProps {

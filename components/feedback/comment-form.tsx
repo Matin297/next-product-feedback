@@ -7,7 +7,7 @@ import { addComment } from "@/actions";
 import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import TextField from "@mui/material/TextField";
-import FormButton from "@/components/form-button";
+import FormButton from "@/components/common/form-button";
 
 interface CommentFormProps extends PropsWithChildren {
   parentId?: string;

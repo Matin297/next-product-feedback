@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
-import FeedbackCard from "@/components/feedback-card";
+import FeedbackCard from "@/components/common/feedback-card";
 import Skeleton from "./skeleton";
 
 interface FeedbackListProps extends FeedbackSortOption, FeedbackFilterOption {}

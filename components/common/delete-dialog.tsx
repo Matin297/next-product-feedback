@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
-import FormButton from "@/components/form-button";
+import FormButton from "@/components/common/form-button";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
 import DialogContent from "@mui/material/DialogContent";

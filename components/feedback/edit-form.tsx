@@ -14,9 +14,9 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import Typography from "@mui/material/Typography";
-import FormButton from "@/components/form-button";
+import FormButton from "@/components/common/form-button";
 import FormControl from "@mui/material/FormControl";
-import DeleteDialog from "@/components/delete-dialog";
+import DeleteDialog from "@/components/common/delete-dialog";
 import FormHelperText from "@mui/material/FormHelperText";
 
 interface CreateFeedbackFormProps {
