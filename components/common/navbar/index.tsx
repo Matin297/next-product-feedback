@@ -11,7 +11,7 @@ export default function Navbar() {
   return (
     <AppBar variant="outlined" sx={{ backgroundColor: "common.white" }}>
       <Toolbar>
-        <Container>
+        <Container maxWidth="xl">
           <Box
             display="flex"
             alignItems="center"

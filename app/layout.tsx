@@ -27,7 +27,7 @@ export default function RootLayout({
             <ThemeProvider theme={theme}>
               <Navbar />
               <Toolbar />
-              <Container>
+              <Container maxWidth="xl">
                 <Box paddingBlock={3}>{children}</Box>
               </Container>
             </ThemeProvider>
