@@ -13,6 +13,10 @@ export async function fetchCategories() {
   }
 }
 
+export type FeedbacksByStatusType = Awaited<
+  ReturnType<typeof fetchFeedbacksByStatus>
+>;
+
 export async function fetchFeedbacksByStatus(
   status: Status = "SUGGESTION",
   orderOptions: FeedbackSortOption & FeedbackFilterOption = {}
