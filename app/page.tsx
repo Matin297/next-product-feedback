@@ -2,8 +2,6 @@ import { FeedbackSortOption, FeedbackFilterOption } from "@/lib/types";
 
 import { Suspense } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import AddIcon from "@mui/icons-material/Add";
 import FeedbackSort from "@/components/home/feedback-sort";
 import FeedbackList, {
   FeedbackListSkeleton,
@@ -14,21 +12,27 @@ import RoadmapSummary, {
 import FeedbackFilter from "@/components/home/feedback-filter";
 
 interface HomeProps {
-  searchParams?: FeedbackSortOption & FeedbackFilterOption;
+  searchParams?: FeedbackSortOption & FeedbackFilterOption & { page?: string };
 }
 
 export default function Home({ searchParams }: HomeProps) {
   const field = searchParams?.field;
   const order = searchParams?.order;
   const categoryId = searchParams?.categoryId;
+  const page = Number(searchParams?.page) || 1;
 
   return (
     <Box display="flex" gap={5}>
       <Suspense
-        key={`${field || ""}${order || ""}${categoryId || ""}`}
+        key={`${field || ""}${order || ""}${categoryId || ""}${page}`}
         fallback={<FeedbackListSkeleton />}
       >
-        <FeedbackList field={field} order={order} categoryId={categoryId} />
+        <FeedbackList
+          page={page}
+          field={field}
+          order={order}
+          categoryId={categoryId}
+        />
       </Suspense>
       <Box
         component="aside"
@@ -38,13 +42,6 @@ export default function Home({ searchParams }: HomeProps) {
         flexDirection="column"
         gap={2}
       >
-        <Button
-          href="/feedback/create"
-          variant="contained"
-          startIcon={<AddIcon />}
-        >
-          Add Feedback
-        </Button>
         <FeedbackSort />
         <FeedbackFilter />
         <Suspense fallback={<RoadmapSummarySkeleton />}>

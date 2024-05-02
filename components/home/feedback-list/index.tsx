@@ -1,21 +1,32 @@
-import { fetchFeedbacksByStatus } from "@/lib/data";
+import {
+  fetchFilteredFeedbacks,
+  fetchTotalFilteredFeedbackPages,
+} from "@/lib/data";
 import { FeedbackSortOption, FeedbackFilterOption } from "@/lib/types";
 
+import Skeleton from "./skeleton";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
+import Tooltip from "@mui/material/Tooltip";
 import ListItem from "@mui/material/ListItem";
+import AddIcon from "@mui/icons-material/Add";
 import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
 import FeedbackCard from "@/components/common/feedback-card";
-import Skeleton from "./skeleton";
+import Pagination from "@/components/common/pagination/wrapper";
 
-interface FeedbackListProps extends FeedbackSortOption, FeedbackFilterOption {}
+interface FeedbackListProps extends FeedbackSortOption, FeedbackFilterOption {
+  page: number;
+}
 
 export default async function FeedbackList({
+  page,
   order,
   field,
   categoryId,
 }: FeedbackListProps) {
-  const feedbacks = await fetchFeedbacksByStatus("SUGGESTION", {
+  const feedbacks = await fetchFilteredFeedbacks("SUGGESTION", {
+    page,
     field,
     order,
     categoryId,
@@ -23,17 +34,17 @@ export default async function FeedbackList({
 
   return (
     <Box flexGrow={1}>
-      <Box>
-        <Typography variant="h4" color="secondary" display="inline-block">
-          {feedbacks.length}
-        </Typography>
-        <Typography marginInlineStart={1} display="inline-block">
-          {`Suggestion${feedbacks.length > 1 ? "s" : ""}`}
-        </Typography>
+      <Box display="flex" alignItems="center">
+        <Typography variant="h6">Suggestions</Typography>
+        <Tooltip title="Add Feedback">
+          <IconButton color="secondary" href="/feedback/create">
+            <AddIcon />
+          </IconButton>
+        </Tooltip>
       </Box>
       <List>
         {feedbacks.map(({ category, _count, ...feedback }) => (
-          <ListItem disableGutters key={feedback.id}>
+          <ListItem disableGutters key={feedback.id} sx={{ width: "100%" }}>
             <FeedbackCard
               {...feedback}
               category={category.title}
@@ -42,6 +53,17 @@ export default async function FeedbackList({
           </ListItem>
         ))}
       </List>
+      <Pagination
+        fetchTotalPages={fetchTotalFilteredFeedbackPages.bind(
+          null,
+          "SUGGESTION",
+          {
+            field,
+            order,
+            categoryId,
+          }
+        )}
+      />
     </Box>
   );
 }
