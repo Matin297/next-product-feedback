@@ -31,6 +31,7 @@ export default function FeedbackSort() {
 
     const [field, order] = e.target.value.split("/");
 
+    params.set("page", "1");
     params.set("field", field);
     params.set("order", order);
 

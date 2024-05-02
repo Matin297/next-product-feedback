@@ -22,6 +22,8 @@ export default function FeedbackFilter({ categories }: FeedbackFilterProps) {
   const handleClick = (id: string | null) => () => {
     const params = new URLSearchParams(searchParams);
 
+    params.set("page", "1");
+
     if (id) {
       params.set("categoryId", id);
     } else {
