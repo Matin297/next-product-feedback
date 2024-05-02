@@ -1,7 +1,11 @@
 import { cache } from "react";
 import db from "@/prisma/client";
 import { Status } from "@prisma/client";
-import { FeedbackSortOption, FeedbackFilterOption } from "@/lib/types";
+import {
+  FeedbackSortOption,
+  FeedbackFilterOption,
+  FeedbackPaginationOptions,
+} from "@/lib/types";
 
 export async function fetchCategories() {
   try {
@@ -13,16 +17,50 @@ export async function fetchCategories() {
   }
 }
 
-export type FeedbacksByStatusType = Awaited<
-  ReturnType<typeof fetchFeedbacksByStatus>
->;
+const ITEMS_PER_PAGE = 6;
 
-export async function fetchFeedbacksByStatus(
+export async function fetchTotalFilteredFeedbackPages(
   status: Status = "SUGGESTION",
   orderOptions: FeedbackSortOption & FeedbackFilterOption = {}
 ) {
   try {
     const { field, order, categoryId } = orderOptions;
+
+    const total = await db.feedback.aggregate({
+      ...(field &&
+        order && {
+          orderBy: {
+            [field]: order,
+          },
+        }),
+      where: {
+        status,
+        ...(categoryId && { category_id: categoryId }),
+      },
+      _count: {
+        id: true,
+      },
+    });
+
+    return Math.ceil(total._count.id / ITEMS_PER_PAGE);
+  } catch (error) {
+    console.error(error);
+    throw new Error("Failed to fetch total pages for feedbacks!");
+  }
+}
+
+export type FilteredFeedbacksType = Awaited<
+  ReturnType<typeof fetchFilteredFeedbacks>
+>;
+
+export async function fetchFilteredFeedbacks(
+  status: Status = "SUGGESTION",
+  orderOptions: FeedbackSortOption &
+    FeedbackFilterOption &
+    FeedbackPaginationOptions = {}
+) {
+  try {
+    const { field, order, categoryId, page } = orderOptions;
 
     const feedbacks = await db.feedback.findMany({
       ...(field &&
@@ -47,6 +85,10 @@ export async function fetchFeedbacksByStatus(
           },
         },
       },
+      ...(page && {
+        skip: (page - 1) * ITEMS_PER_PAGE,
+        take: ITEMS_PER_PAGE,
+      }),
     });
     return feedbacks;
   } catch (error) {
