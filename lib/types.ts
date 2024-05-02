@@ -6,3 +6,7 @@ export interface FeedbackSortOption {
 export interface FeedbackFilterOption {
   categoryId?: string;
 }
+
+export interface FeedbackPaginationOptions {
+  page?: number;
+}
