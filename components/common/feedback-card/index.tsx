@@ -23,10 +23,10 @@ export default function FeedbackCard({
   comments,
 }: FeedbackCardProps) {
   return (
-    <Card elevation={3}>
+    <Card elevation={3} sx={{ width: "100%" }}>
       <CardContent component={Box} display="flex" gap={2}>
         <Voting id={id} upvotes={upvotes} />
-        <Box>
+        <Box flexGrow={1}>
           <Link underline="hover" href={`/feedback/${id}`}>
             <Typography variant="h6">{title}</Typography>
           </Link>
