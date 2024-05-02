@@ -1,4 +1,4 @@
-import { fetchFeedbacksByStatus } from "@/lib/data";
+import { fetchFilteredFeedbacks } from "@/lib/data";
 
 import { Suspense } from "react";
 import Grid from "@mui/material/Grid";
@@ -13,7 +13,7 @@ export default async function Roadmap() {
           <FeedbackColumn
             title="Planned"
             description="Ideas prioritized for research"
-            fetchFeedbacks={fetchFeedbacksByStatus.bind(null, "PLANNED")}
+            fetchFeedbacks={fetchFilteredFeedbacks.bind(null, "PLANNED")}
           />
         </Suspense>
       </Grid>
@@ -22,7 +22,7 @@ export default async function Roadmap() {
           <FeedbackColumn
             title="In Progress"
             description="Currently being developed"
-            fetchFeedbacks={fetchFeedbacksByStatus.bind(null, "IN_PROGRESS")}
+            fetchFeedbacks={fetchFilteredFeedbacks.bind(null, "IN_PROGRESS")}
           />
         </Suspense>
       </Grid>
@@ -31,7 +31,7 @@ export default async function Roadmap() {
           <FeedbackColumn
             title="Live"
             description="Released features"
-            fetchFeedbacks={fetchFeedbacksByStatus.bind(null, "LIVE")}
+            fetchFeedbacks={fetchFilteredFeedbacks.bind(null, "LIVE")}
           />
         </Suspense>
       </Grid>

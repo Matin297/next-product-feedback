@@ -1,4 +1,4 @@
-import { FeedbacksByStatusType } from "@/lib/data";
+import { FilteredFeedbacksType } from "@/lib/data";
 
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -9,7 +9,7 @@ import FeedbackCard from "@/components/common/feedback-card";
 interface FeedbackColumnProps {
   title: string;
   description: string;
-  fetchFeedbacks: () => Promise<FeedbacksByStatusType>;
+  fetchFeedbacks: () => Promise<FilteredFeedbacksType>;
 }
 
 export default async function FeedbackColumn({
