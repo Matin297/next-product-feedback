@@ -6,16 +6,21 @@ import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
-import FormButton from "@/components/common/form-button";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
+import FormButton from "@/components/common/form-button";
+
+type DeleteResult =
+  | {
+      error?: string;
+    }
+  | undefined;
 
 interface DeleteDialogProps {
-  deleteAction: () => Promise<{
-    error?: string;
-  }>;
+  deleteAction: () => Promise<DeleteResult>;
 }
 
 export default function DeleteDialog({ deleteAction }: DeleteDialogProps) {
@@ -33,7 +38,7 @@ export default function DeleteDialog({ deleteAction }: DeleteDialogProps) {
   async function handleFormAction() {
     const result = await deleteAction();
 
-    if (result.error) {
+    if (result?.error) {
       setSnackbar({
         open: true,
         message: result.error,
@@ -50,9 +55,9 @@ export default function DeleteDialog({ deleteAction }: DeleteDialogProps) {
 
   return (
     <>
-      <Button variant="contained" color="error" onClick={handleOpen}>
-        Delete
-      </Button>
+      <IconButton color="error" onClick={handleOpen}>
+        <DeleteIcon />
+      </IconButton>
       <Dialog open={open} onClose={handleClose}>
         <DialogContent>
           <Typography>Are you sure you want to delete this item?</Typography>
