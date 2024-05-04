@@ -9,11 +9,13 @@ import FeedbackCard from "@/components/common/feedback-card";
 interface FeedbackColumnProps {
   title: string;
   description: string;
+  color: "orange" | "purple" | "skyblue";
   fetchFeedbacks: () => Promise<FilteredFeedbacksType>;
 }
 
 export default async function FeedbackColumn({
   title,
+  color,
   description,
   fetchFeedbacks,
 }: FeedbackColumnProps) {
@@ -25,7 +27,7 @@ export default async function FeedbackColumn({
         borderRadius={1}
         borderBottom={3}
         paddingBlockEnd={1}
-        borderColor="orange"
+        borderColor={color}
       >
         <Typography variant="h6">
           {title}

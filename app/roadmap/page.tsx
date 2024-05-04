@@ -11,6 +11,7 @@ export default async function Roadmap() {
       <Grid item xs={12} md={4}>
         <Suspense fallback={<FeedbackColumnSkeleton />}>
           <FeedbackColumn
+            color="orange"
             title="Planned"
             description="Ideas prioritized for research"
             fetchFeedbacks={fetchFilteredFeedbacks.bind(null, "PLANNED")}
@@ -20,6 +21,7 @@ export default async function Roadmap() {
       <Grid item xs={12} md={4}>
         <Suspense fallback={<FeedbackColumnSkeleton />}>
           <FeedbackColumn
+            color="purple"
             title="In Progress"
             description="Currently being developed"
             fetchFeedbacks={fetchFilteredFeedbacks.bind(null, "IN_PROGRESS")}
@@ -30,6 +32,7 @@ export default async function Roadmap() {
         <Suspense fallback={<FeedbackColumnSkeleton />}>
           <FeedbackColumn
             title="Live"
+            color="skyblue"
             description="Released features"
             fetchFeedbacks={fetchFilteredFeedbacks.bind(null, "LIVE")}
           />
