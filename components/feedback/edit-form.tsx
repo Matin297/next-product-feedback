@@ -44,8 +44,10 @@ export default function EditFeedbackForm({
     >
       {state.message && <Alert severity="error">{state.message}</Alert>}
       <input type="hidden" name="id" value={feedback?.id} />
-      <DeleteDialog deleteAction={deleteFeedback.bind(null, feedback?.id)} />
-      <Typography variant="h6">Feedback Info</Typography>
+      <Box display="flex" alignItems="center">
+        <Typography variant="h6">Feedback Info</Typography>
+        <DeleteDialog deleteAction={deleteFeedback.bind(null, feedback?.id)} />
+      </Box>
       <TextField
         required
         name="title"
