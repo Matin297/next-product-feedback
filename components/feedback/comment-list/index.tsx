@@ -4,11 +4,11 @@ import Skeleton from "./skeleton";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
 import CommentReply from "../comment-reply";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
+import DeleteCommentButton from "./delete-button";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 
@@ -40,6 +40,9 @@ export default async function CommentList({
                     <Typography variant="caption">
                       {comment.user.email}
                     </Typography>
+                  </Box>
+                  <Box marginInlineStart="auto">
+                    <DeleteCommentButton comment={comment} />
                   </Box>
                 </Box>
                 <Typography marginBlockStart={3}>{comment.content}</Typography>
