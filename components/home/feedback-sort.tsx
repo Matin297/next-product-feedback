@@ -19,6 +19,16 @@ const FEEDBACK_SORT_OPTIONS = [
     title: "Least Upvotes",
     value: "upvotes/asc",
   },
+  {
+    id: 3,
+    title: "Most Comments",
+    value: "comments/desc",
+  },
+  {
+    id: 4,
+    title: "Least Comments",
+    value: "comments/asc",
+  },
 ];
 
 export default function FeedbackSort() {

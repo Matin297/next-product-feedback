@@ -60,7 +60,9 @@ export async function fetchFilteredFeedbacks(
       ...(field &&
         order && {
           orderBy: {
-            [field]: order,
+            ...(field === "comments"
+              ? { comments: { _count: order } }
+              : { [field]: order }),
           },
         }),
       where: {
