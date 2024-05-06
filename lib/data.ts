@@ -21,18 +21,12 @@ const ITEMS_PER_PAGE = 6;
 
 export async function fetchTotalFilteredFeedbackPages(
   status: Status = "SUGGESTION",
-  orderOptions: FeedbackSortOption & FeedbackFilterOption = {}
+  orderOptions: FeedbackFilterOption = {}
 ) {
   try {
-    const { field, order, categoryId } = orderOptions;
+    const { categoryId } = orderOptions;
 
     const total = await db.feedback.aggregate({
-      ...(field &&
-        order && {
-          orderBy: {
-            [field]: order,
-          },
-        }),
       where: {
         status,
         ...(categoryId && { category_id: categoryId }),

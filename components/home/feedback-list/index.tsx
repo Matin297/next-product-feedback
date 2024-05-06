@@ -57,11 +57,7 @@ export default async function FeedbackList({
         fetchTotalPages={fetchTotalFilteredFeedbackPages.bind(
           null,
           "SUGGESTION",
-          {
-            field,
-            order,
-            categoryId,
-          }
+          { categoryId }
         )}
       />
     </Box>
