@@ -24,12 +24,19 @@ export async function fetchTotalFilteredFeedbackPages(
   orderOptions: FeedbackFilterOption = {}
 ) {
   try {
-    const { categoryId } = orderOptions;
+    const { categoryId, query } = orderOptions;
 
     const total = await db.feedback.aggregate({
       where: {
         status,
         ...(categoryId && { category_id: categoryId }),
+        ...(query && {
+          OR: [
+            { title: { contains: query, mode: "insensitive" } },
+            { description: { contains: query, mode: "insensitive" } },
+            { category: { title: { contains: query, mode: "insensitive" } } },
+          ],
+        }),
       },
       _count: {
         id: true,
@@ -54,7 +61,7 @@ export async function fetchFilteredFeedbacks(
     FeedbackPaginationOptions = {}
 ) {
   try {
-    const { field, order, categoryId, page } = orderOptions;
+    const { field, order, categoryId, page, query } = orderOptions;
 
     const feedbacks = await db.feedback.findMany({
       ...(field &&
@@ -68,6 +75,13 @@ export async function fetchFilteredFeedbacks(
       where: {
         status,
         ...(categoryId && { category_id: categoryId }),
+        ...(query && {
+          OR: [
+            { title: { contains: query, mode: "insensitive" } },
+            { description: { contains: query, mode: "insensitive" } },
+            { category: { title: { contains: query, mode: "insensitive" } } },
+          ],
+        }),
       },
       include: {
         _count: {
