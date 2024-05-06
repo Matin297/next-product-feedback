@@ -23,6 +23,14 @@ export default async function CommentList({
 }: CommentListProps) {
   const comments = await fetchFeedbackComments(feedbackId);
 
+  if (comments.length === 0) {
+    return (
+      <Typography textAlign="center" marginBlock={2} fontSize={12}>
+        No comments!
+      </Typography>
+    );
+  }
+
   return (
     <List>
       {comments
