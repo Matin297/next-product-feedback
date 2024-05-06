@@ -1,8 +1,10 @@
-export * from "./logout";
-export * from "./sign-in";
-export * from "./add-comment";
-export * from "./edit-feedback";
-export * from "./delete-comment";
-export * from "./create-feedback";
-export * from "./update-feedback";
-export * from "./delete-feedback";
+export * from "./auth/logout";
+export * from "./auth/sign-in";
+
+export * from "./comment/add";
+export * from "./comment/delete";
+
+export * from "./feedback/edit";
+export * from "./feedback/create";
+export * from "./feedback/delete";
+export * from "./feedback/update-votes";
