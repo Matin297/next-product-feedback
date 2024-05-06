@@ -23,12 +23,14 @@ export default async function FeedbackList({
   page,
   order,
   field,
+  query,
   categoryId,
 }: FeedbackListProps) {
   const feedbacks = await fetchFilteredFeedbacks("SUGGESTION", {
     page,
     field,
     order,
+    query,
     categoryId,
   });
 
@@ -57,7 +59,7 @@ export default async function FeedbackList({
         fetchTotalPages={fetchTotalFilteredFeedbackPages.bind(
           null,
           "SUGGESTION",
-          { categoryId }
+          { categoryId, query }
         )}
       />
     </Box>
