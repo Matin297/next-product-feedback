@@ -5,6 +5,7 @@ export interface FeedbackSortOption {
 
 export interface FeedbackFilterOption {
   categoryId?: string;
+  query?: string;
 }
 
 export interface FeedbackPaginationOptions {
